@@ -33,8 +33,11 @@ class BaseRegressor():
     def train_model(self, X_train, y_train, X_val, y_val):
 
         # Padding data with vector of ones for bias term
-        X_train = np.hstack([X_train, np.ones((X_train.shape[0], 1))])
-        X_val = np.hstack([X_val, np.ones((X_val.shape[0], 1))])
+
+        # I changed this- added the possiblity of adding bias term outside.
+        if X_train.shape[1] == self.num_feats:  # num_feats does not include bias
+            X_train = np.hstack([X_train, np.ones((X_train.shape[0], 1))])
+            X_val = np.hstack([X_val, np.ones((X_val.shape[0], 1))])
     
         # Defining intitial values for while loop
         prev_update_size = 1
@@ -173,4 +176,4 @@ class LogisticRegressor(BaseRegressor):
         gradient = (1/X.shape[0]) * np.dot(X.T, diff)
 
         return gradient
-
+    
