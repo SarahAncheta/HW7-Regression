@@ -129,7 +129,10 @@ class LogisticRegressor(BaseRegressor):
         Returns: 
             The predicted labels (y_pred) for given X.
         """
-        pass
+        pre_predicted_ys = np.dot(X, self.W) #we do the linear regresion part
+        y_pred= 1 / (1 +  np.exp(-pre_predicted_ys)) #we apply the sigmoid function to the output as defined in https://en.wikipedia.org/wiki/Sigmoid_function
+
+        return y_pred
     
     def loss_function(self, y_true, y_pred) -> float:
         """
@@ -143,7 +146,10 @@ class LogisticRegressor(BaseRegressor):
         Returns: 
             The mean loss (a single number).
         """
-        pass
+
+        loss = -np.mean(y_true * np.log(y_pred) + (1 - y_true)*np.log(1 - y_pred)) #formula for binary cross entropy loss https://www.geeksforgeeks.org/binary-cross-entropy-log-loss-for-binary-classification/
+
+        return loss
         
     def calculate_gradient(self, y_true, X) -> np.ndarray:
         """
@@ -158,3 +164,13 @@ class LogisticRegressor(BaseRegressor):
             Vector of gradients.
         """
         pass
+
+        y_hats = self.make_prediction(X)
+
+        diff = y_hats - y_true
+
+        #chatgpt helped me with this line
+        gradient = (1/X.shape[0]) * np.dot(X.T, diff)
+
+        return gradient
+

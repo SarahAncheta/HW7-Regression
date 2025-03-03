@@ -11,6 +11,13 @@ This is not an exhaustive list.
 # Imports
 import pytest
 # (you will probably need to import more things here)
+import numpy as np
+from regression.utils import loadDataset
+from regression.logreg import BaseRegressor, LogisticRegressor
+
+X, y = loadDataset()
+
+
 
 def test_prediction():
 	pass
