@@ -1,5 +1,10 @@
 # HW 7: logistic regression
 
+Here is my GitHub actions badge.
+
+[![Project Tests](https://github.com/SarahAncheta/HW7-Regression/actions/workflows/python-app.yml/badge.svg)](https://github.com/SarahAncheta/HW7-Regression/actions/workflows/python-app.yml)
+
+
 In this assignment, you'll implement a classifier using logistic regression, optimized with gradient descent.
 
 ## Overview
